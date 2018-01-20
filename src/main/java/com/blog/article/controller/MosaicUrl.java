@@ -17,7 +17,7 @@ public class MosaicUrl {
 	* by zbb
 	* @title: getUrl
 	* @Description: TODO
-	* @param type 1 Êı×Ö 2 ×ÖÄ¸ 3 Æ´Òô 4ÉùÄ¸
+	* @param type 1 æ•°å­— 2 å­—æ¯ 3 æ‹¼éŸ³ 4å£°æ¯
 	* @param number
 	* @param houzhui
 	* void      
@@ -25,7 +25,7 @@ public class MosaicUrl {
 	*/
 	public static void getUrl(int type, int number, String houzhui) {
 		System.out.println("******************************");
-		System.out.println("½øÈëÊ±¼ä£º"+DateFormat.DateToString(new Date()));
+		System.out.println("è¿›å…¥æ—¶é—´ï¼š"+DateFormat.DateToString(new Date()));
 		List<SelectResultModel> resultList = new ArrayList<SelectResultModel>();
 		List<String> list = new ArrayList<String>();
 		List<String> urlList = new ArrayList<String>();
@@ -36,18 +36,18 @@ public class MosaicUrl {
 		} else if (type == 3) {
 			ASSS.get(list, Pinying.pinying, number);
 		} else if(type ==4) {
-			//ÉùÄ¸
+			//å£°æ¯
 			ASSS.get(list, CommonApi.shengmu, number);
 		}
-		System.out.println("Éú³É½áÊø,¹²ÓĞ"+list.size()+"ÌõÊı¾İ,Ê±¼ä£º"+DateFormat.DateToString(new Date()));
+		System.out.println("ç”Ÿæˆç»“æŸ,å…±æœ‰"+list.size()+"æ¡æ•°æ®,æ—¶é—´ï¼š"+DateFormat.DateToString(new Date()));
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < list.size(); i++) {
 			urlList.add(sb.append(list.get(i)).append(".").append(houzhui).toString());
 			sb.delete(0, sb.length());
 		}
 		
-		//»ñÈ¡Íê½á¹û ¿ªÊ¼²éÑ¯ÊÇ·ñ´æÔÚ
-		//·ÖÅú²éÑ¯ 500ÌõÒ»¶Î
+		//è·å–å®Œç»“æœ å¼€å§‹æŸ¥è¯¢æ˜¯å¦å­˜åœ¨
+		//åˆ†æ‰¹æŸ¥è¯¢ 500æ¡ä¸€æ®µ
 		
 		for (int i = 0; i < urlList.size(); i++) {
 			String resultStr =HttpClick.httpURLConectionGET(CommonApi.URL+urlList.get(i),i);
@@ -60,12 +60,12 @@ public class MosaicUrl {
 				m.setFlag(false);
 			}
 			resultList.add(m);
-			System.out.println(m.getUrl() +"****×´Ì¬£º"+m.getCode());
+			System.out.println(m.getUrl() +"****çŠ¶æ€ï¼š"+m.getCode());
 		}
 		
-		System.out.println("×Ü¹²ÓĞ"+resultList.size()+"¸ö¿ÉÓÃ,²éÑ¯ÍæÊ±¼ä£º"+DateFormat.DateToString(new Date()));
+		System.out.println("æ€»å…±æœ‰"+resultList.size()+"ä¸ªå¯ç”¨,æŸ¥è¯¢ç©æ—¶é—´ï¼š"+DateFormat.DateToString(new Date()));
 		
-		System.out.println("¿ÉÓÃÊı¾İÎªÒÔÏÂÕâĞ©");
+		System.out.println("å¯ç”¨æ•°æ®ä¸ºä»¥ä¸‹è¿™äº›");
 		for (int i = 0; i < resultList.size(); i++) {
 			if(resultList.get(i).getFlag()) {
 				System.out.println(resultList.get(i).getUrl());

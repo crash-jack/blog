@@ -11,10 +11,10 @@ public class ASSS {
     /** 
     * by zbb
     * @title: get
-    * @Description: Êý×éÆ´½Ó
-    * @param list  ½ÓÊÜ½á¹ûµÄ¿Õlist
-    * @param str  Êý×é
-    * @param num  Æ´½Ó´ÎÊý
+    * @Description: ï¿½ï¿½ï¿½ï¿½Æ´ï¿½ï¿½
+    * @param list  ï¿½ï¿½ï¿½Ü½ï¿½ï¿½ï¿½Ä¿ï¿½list
+    * @param str  ï¿½ï¿½ï¿½ï¿½
+    * @param num  Æ´ï¿½Ó´ï¿½ï¿½ï¿½
     * void      
     * @throws 
     */
@@ -42,10 +42,10 @@ public class ASSS {
     /** 
      * by zbb
      * @title: get
-     * @Description: Êý×éÆ´½Ó
-     * @param list  ½ÓÊÜ½á¹ûµÄ¿Õlist
+     * @Description: ï¿½ï¿½ï¿½ï¿½Æ´ï¿½ï¿½
+     * @param list  ï¿½ï¿½ï¿½Ü½ï¿½ï¿½ï¿½Ä¿ï¿½list
      * @param str  list
-     * @param num  Æ´½Ó´ÎÊý
+     * @param num  Æ´ï¿½Ó´ï¿½ï¿½ï¿½
      * void      
      * @throws 
      */

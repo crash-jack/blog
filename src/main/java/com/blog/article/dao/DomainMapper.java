@@ -2,6 +2,8 @@ package com.blog.article.dao;
 
 import com.blog.article.model.Domain;
 
+import java.util.List;
+
 public interface DomainMapper {
     int deleteByPrimaryKey(Long sId);
 
@@ -14,4 +16,6 @@ public interface DomainMapper {
     int updateByPrimaryKeySelective(Domain record);
 
     int updateByPrimaryKey(Domain record);
+
+    List<Domain> getAllData();
 }

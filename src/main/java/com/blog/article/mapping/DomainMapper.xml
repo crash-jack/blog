@@ -112,4 +112,9 @@
       update_time = #{updateTime,jdbcType=VARCHAR}
     where s_id = #{sId,jdbcType=BIGINT}
   </update>
+
+
+  <select id="getAllData"  resultMap="BaseResultMap">
+    select * from s_domain
+  </select>
 </mapper>

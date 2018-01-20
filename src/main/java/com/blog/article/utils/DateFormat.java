@@ -9,7 +9,7 @@ import java.util.Date;
 * @ClassName: DateFormat 
 * @Description: 日期时间格式转换
 * @author zbb 
-* @date 2017�?12�?13�? 下午4:34:53 
+* @date 2017??12??13?? 下午4:34:53 
 *  
 */
 public class DateFormat {
