@@ -28,7 +28,15 @@
     <servlet-name>dispatcherServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-
+  <!-- log4j配置 -->
+  <context-param>
+    <param-name>webAppRootKey</param-name>
+    <param-value>ssyt-merchant-mp</param-value>
+  </context-param>
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>classpath:log4j.properties</param-value>
+  </context-param>
 
   <!-- 欢迎页面-->
   <welcome-file-list>

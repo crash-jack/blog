@@ -31,6 +31,10 @@
         <!-- jdk -->
         <jdk.version>1.8</jdk.version>
         <maven.compiler.plugin.version>3.2.5</maven.compiler.plugin.version>
+        <com.fasterxml.jackson.version>2.8.5</com.fasterxml.jackson.version>
+
+            <jackson.version>2.5.4</jackson.version>
+
     </properties>
 
 
@@ -146,21 +150,40 @@
 			<version>5.1.21</version>
 		</dependency>
 
+        <!-- 返回值为json 类型的自动转换格式-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${com.fasterxml.jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${com.fasterxml.jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${com.fasterxml.jackson.version}</version>
+        </dependency>
+
+        <!-- log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
     </dependencies>
 
 
     <build>
-        <plugins>
-            <!-- define the project compile level -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2.5</version>
-                <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                </configuration>
-            </plugin>
-        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 </project>

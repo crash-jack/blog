@@ -13,6 +13,8 @@ public class Domain implements Serializable {
 
     private String url;
 
+    private String suffix;
+
     private String code;
 
     private String state;
@@ -22,6 +24,14 @@ public class Domain implements Serializable {
     private String updateTime;
 
     private static final long serialVersionUID = 1L;
+
+    public String getSuffix() {
+        return suffix;
+    }
+
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
+    }
 
     public Long getsId() {
         return sId;

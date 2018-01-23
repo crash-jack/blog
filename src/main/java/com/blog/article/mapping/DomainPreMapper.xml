@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.blog.article.dao.DomainMapper">
+<mapper namespace="com.blog.article.dao.DomainPreMapper">
   <resultMap id="BaseResultMap" type="com.blog.article.model.Domain">
     <id column="s_id" jdbcType="BIGINT" property="sId" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
@@ -17,15 +17,18 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from s_domain
+    from s_domain_pre
     where s_id = #{sId,jdbcType=BIGINT}
   </select>
+  <delete id="deleteAll">
+     delete from s_domain_pre
+  </delete>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from s_domain
+    delete from s_domain_pre
     where s_id = #{sId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.blog.article.model.Domain">
-    insert into s_domain ( sort, url, 
+    insert into s_domain_pre ( sort, url, 
       code, state, create_time, 
       update_time)
     values (#{sort,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, 
@@ -35,7 +38,7 @@
       #{updateTime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.blog.article.model.Domain">
-    insert into s_domain
+    insert into s_domain_pre
     <trim prefix="(" suffix=")" suffixOverrides=",">
      
       <if test="sort != null">
@@ -86,7 +89,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.blog.article.model.Domain">
-    update s_domain
+    update s_domain_pre
     <set>
       <if test="sort != null">
         sort = #{sort,jdbcType=INTEGER},
@@ -110,7 +113,7 @@
     where s_id = #{sId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.blog.article.model.Domain">
-    update s_domain
+    update s_domain_pre
     set sort = #{sort,jdbcType=INTEGER},
       url = #{url,jdbcType=VARCHAR},
       code = #{code,jdbcType=VARCHAR},
@@ -121,7 +124,10 @@
   </update>
 
 
-  <select id="getAllData"  resultMap="BaseResultMap">
-    select * from s_domain
+  <select id="getMiList" parameterType="map" resultType="com.blog.article.model.Domain">
+    select * from s_domain_pre
+
   </select>
+
+
 </mapper>

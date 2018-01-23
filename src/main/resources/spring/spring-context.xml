@@ -41,4 +41,7 @@
         <property name="basePackage" value="com.**.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
     </bean>
+
+
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource" />
 </beans>
