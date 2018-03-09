@@ -1,7 +1,10 @@
 package com.blog.article.controller;
 
 
+import com.blog.article.model.Article;
 import com.blog.article.model.Domain;
+import com.blog.article.qo.ArticleQo;
+import com.blog.article.service.ArticleService;
 import com.blog.article.service.DomainService;
 import com.blog.article.utils.Pagination;
 import com.blog.article.vo.DomainVo;
@@ -17,44 +20,19 @@ import java.util.List;
 
 @CrossOrigin(maxAge = 3600)
 @Controller
-@RequestMapping("/testController")
+@RequestMapping("/article")
 public class ArticleController {
 
     @Autowired
-    DomainService domainService;
 
-    @RequestMapping(value="/getView")
-    @ResponseBody
-    public String getTest(HttpServletRequest request){
-    	System.out.println(111111);
-        List<Domain> list =  domainService.getAllData();
-        for (Domain data : list){
-            System.out.println(data.getsId()+"_________"+data.getCode()+data.getCreateTime());
-        }
-        return "asdf123333123";
-    }
 
-    @RequestMapping(value="/generateMi",method = RequestMethod.GET)
-    @ResponseBody
-    public String generateMi(DomainVo domainVo){
-//        DomainVo domainVo = new DomainVo();
-//        domainVo.setType(type);
-//        domainVo.setNumber(number);
-//        domainVo.setHouzhui(houzhui);
-        System.out.println(111111);
-        try{
-            List<Domain> list =  domainService.miList(domainVo);
-        }catch (Exception e){
-            e.printStackTrace();
-            return "有问题";
-        }
-        return "没问题";
-    }
 
-    @RequestMapping(value="/listMi")
+    ArticleService articleService;
+
+    @RequestMapping(value="/getArticleList")
     @ResponseBody
-    public List<Domain> listMi(DomainVo domainVo,Pagination page){
-        List<Domain> list =  domainService.getMiList(domainVo,page);
+    public List<Article> getArticleList(ArticleQo articleQo, Pagination page){
+        List<Article> list =  articleService.getArticleList(articleQo,page);
         return  list;
     }
 }

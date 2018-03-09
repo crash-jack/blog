@@ -3,15 +3,13 @@ package com.blog.article.vo;
 public class DomainVo {
 
     private String url;
-
     private String code;
-
     private String state;
     private Integer type ;
     private Integer number;
     private String houzhui;
-
     private Boolean flag;
+
 
     public Boolean getFlag() {
         return flag;

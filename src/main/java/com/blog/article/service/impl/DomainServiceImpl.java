@@ -11,6 +11,7 @@ import com.blog.article.utils.DateFormat;
 import com.blog.article.utils.HttpClick;
 import com.blog.article.utils.Pagination;
 import com.blog.article.vo.DomainVo;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ import java.util.*;
 
 @Service
 public class DomainServiceImpl implements DomainService {
+    static Logger logger = Logger.getLogger(DomainServiceImpl.class.getName());
+
 
     @Autowired
     DomainMapper domainMapper;
@@ -44,7 +47,7 @@ public class DomainServiceImpl implements DomainService {
         map.put("data",domainVo);
         map.put("page",page);
         List<Domain> list = domainPreMapper.getMiList(map);
-
+        logger.info("aaaaaaaaaaaaa");
         return list;
     }
 
@@ -58,7 +61,7 @@ public class DomainServiceImpl implements DomainService {
     @Override
     public List<Domain> miList(DomainVo domainVo) {
         System.out.println("******************************");
-        System.out.println("进入时间：" + DateFormat.DateToString(new Date()));
+        System.out.println("杩涘叆鏃堕棿锛�" + DateFormat.DateToString(new Date()));
         List<DomainVo> resultList = new ArrayList<DomainVo>();
         List<String> list = new ArrayList<String>();
         List<String> urlList = new ArrayList<String>();
@@ -78,15 +81,15 @@ public class DomainServiceImpl implements DomainService {
             default:
                 break;
         }
-        System.out.println("生成结束,共有" + list.size() + "条数据,时间：" + DateFormat.DateToString(new Date()));
+        System.out.println("鐢熸垚缁撴潫,鍏辨湁" + list.size() + "鏉℃暟鎹�,鏃堕棿锛�" + DateFormat.DateToString(new Date()));
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < list.size(); i++) {
             urlList.add(sb.append(list.get(i)).append(".").append(domainVo.getHouzhui()).toString());
             sb.delete(0, sb.length());
         }
 
-        //获取完结果 开始查询是否存在
-        //分批查询 500条一段
+        //鑾峰彇瀹岀粨鏋� 寮�濮嬫煡璇㈡槸鍚﹀瓨鍦�
+        //鍒嗘壒鏌ヨ 500鏉′竴娈�
         for (int i = 0; i < urlList.size(); i++) {
             String resultStr = HttpClick.httpURLConectionGET(CommonApi.URL + urlList.get(i), i);
             DomainVo m = new DomainVo();
@@ -98,16 +101,16 @@ public class DomainServiceImpl implements DomainService {
                 m.setFlag(false);
             }
             resultList.add(m);
-            System.out.println(m.getUrl() + "****状态：" + m.getCode());
+            System.out.println(m.getUrl() + "****鐘舵�侊細" + m.getCode());
         }
 
-        System.out.println("总共有" + resultList.size() + "个可用,查询玩时间：" + DateFormat.DateToString(new Date()));
+        System.out.println("鎬诲叡鏈�" + resultList.size() + "涓彲鐢�,鏌ヨ鐜╂椂闂达細" + DateFormat.DateToString(new Date()));
         DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);// 事物隔离级别，开启新事务
-        TransactionStatus status = txManager.getTransaction(def); // 获得事务状态
-        System.out.println("可用数据为以下这些");
+        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);// 浜嬬墿闅旂绾у埆锛屽紑鍚柊浜嬪姟
+        TransactionStatus status = txManager.getTransaction(def); // 鑾峰緱浜嬪姟鐘舵��
+        System.out.println("鍙敤鏁版嵁涓轰互涓嬭繖浜�");
 
-
+        logger.info("aaaaaaaaaaaaa");
 
         domainPreMapper.deleteAll();
         for (int i = 0; i < resultList.size(); i++) {
@@ -119,7 +122,7 @@ public class DomainServiceImpl implements DomainService {
             domain.setSuffix(domainVo.getHouzhui());
 //            domain.setCreateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
             domainPreMapper.insertSelective(domain);
-            //逻辑代码，可以写上你的逻辑处理代码
+            //閫昏緫浠ｇ爜锛屽彲浠ュ啓涓婁綘鐨勯�昏緫澶勭悊浠ｇ爜
         }
         txManager.commit(status);
         return null;
@@ -133,7 +136,7 @@ public class DomainServiceImpl implements DomainService {
     }
 
 
-
+    @Override
     public int updateByPrimaryKeySelective(Domain domain) {
         return domainMapper.updateByPrimaryKeySelective(domain);
     }
