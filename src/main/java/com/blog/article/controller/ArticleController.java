@@ -1,6 +1,7 @@
 package com.blog.article.controller;
 
 
+import com.app.core.view.form.AjaxResult;
 import com.blog.article.model.Article;
 import com.blog.article.model.Domain;
 import com.blog.article.qo.ArticleQo;
@@ -24,9 +25,6 @@ import java.util.List;
 public class ArticleController {
 
     @Autowired
-
-
-
     ArticleService articleService;
 
     @RequestMapping(value="/getArticleList")
@@ -35,4 +33,13 @@ public class ArticleController {
         List<Article> list =  articleService.getArticleList(articleQo,page);
         return  list;
     }
+
+    @RequestMapping(value="/save")
+    @ResponseBody
+    public AjaxResult save(ArticleQo articleQo){
+        articleService.save(articleQo);
+        return  null;
+    }
+
+
 }

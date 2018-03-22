@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.article.dao.ArticleDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.blog.article.domain.ArticleDetail" >
+    <result column="OID" property="oid" jdbcType="DECIMAL" />
+    <result column="ARTICLE_ID" property="articleId" jdbcType="DECIMAL" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.blog.article.domain.ArticleDetail" >
+    insert into ARTICLE_DETAIL (OID, ARTICLE_ID, CONTENT
+      )
+    values (#{oid,jdbcType=DECIMAL}, #{articleId,jdbcType=DECIMAL}, #{content,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.blog.article.domain.ArticleDetail" >
+    insert into ARTICLE_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        OID,
+      </if>
+      <if test="articleId != null" >
+        ARTICLE_ID,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        #{oid,jdbcType=DECIMAL},
+      </if>
+      <if test="articleId != null" >
+        #{articleId,jdbcType=DECIMAL},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.article.dao.ArticleTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.blog.article.domain.ArticleType" >
+    <id column="OID" property="oid" jdbcType="DECIMAL" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="TYPE_NAME" property="typeName" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="DECIMAL" />
+    <result column="PARENT_NAME" property="parentName" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    OID, CREATE_TIME, TYPE_NAME, PARENT_ID, PARENT_NAME, STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ARTICLE_TYPE
+    where OID = #{oid,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ARTICLE_TYPE
+    where OID = #{oid,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.blog.article.domain.ArticleType" >
+    insert into ARTICLE_TYPE (OID, CREATE_TIME, TYPE_NAME, 
+      PARENT_ID, PARENT_NAME, STATE
+      )
+    values (#{oid,jdbcType=DECIMAL}, #{createTime,jdbcType=VARCHAR}, #{typeName,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=DECIMAL}, #{parentName,jdbcType=VARCHAR}, #{state,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.blog.article.domain.ArticleType" >
+    insert into ARTICLE_TYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        OID,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="typeName != null" >
+        TYPE_NAME,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="parentName != null" >
+        PARENT_NAME,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        #{oid,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="typeName != null" >
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=DECIMAL},
+      </if>
+      <if test="parentName != null" >
+        #{parentName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.blog.article.domain.ArticleType" >
+    update ARTICLE_TYPE
+    <set >
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="typeName != null" >
+        TYPE_NAME = #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=DECIMAL},
+      </if>
+      <if test="parentName != null" >
+        PARENT_NAME = #{parentName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where OID = #{oid,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.blog.article.domain.ArticleType" >
+    update ARTICLE_TYPE
+    set CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      TYPE_NAME = #{typeName,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=DECIMAL},
+      PARENT_NAME = #{parentName,jdbcType=VARCHAR},
+      STATE = #{state,jdbcType=DECIMAL}
+    where OID = #{oid,jdbcType=DECIMAL}
+  </update>
+</mapper>

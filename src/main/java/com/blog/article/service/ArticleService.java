@@ -9,7 +9,9 @@ import java.util.List;
 public interface ArticleService {
     List<Article> getArticleList(ArticleQo articleQo, Pagination page);
 
-    int insertSelective(Article article);
+    int save(ArticleQo ArticleQo);
 
-    int updateByPrimaryKeySelective(Article article);
+    int update(ArticleQo ArticleQo);
+
+    Article getDetails(Long oid);
  }

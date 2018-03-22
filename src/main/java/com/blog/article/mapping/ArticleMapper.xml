@@ -1,126 +1,177 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.blog.article.dao.ArticleMapper">
-  <resultMap id="BaseResultMap" type="com.blog.article.model.Article">
-    <id column="article_id" jdbcType="BIGINT" property="articleId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="image" jdbcType="VARCHAR" property="image" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="author" jdbcType="VARCHAR" property="author" />
-    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
-    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.blog.article.dao.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.blog.article.domain.Article" >
+    <id column="OID" property="oid" jdbcType="DECIMAL" />
+    <result column="ARTICLE_NAME" property="articleName" jdbcType="VARCHAR" />
+    <result column="AUTHOR" property="author" jdbcType="VARCHAR" />
+    <result column="PAGE_VIEW" property="pageView" jdbcType="DECIMAL" />
+    <result column="SORT_NUMBER" property="sortNumber" jdbcType="DECIMAL" />
+    <result column="ARTICLE_TYPE_ID" property="articleTypeId" jdbcType="DECIMAL" />
+    <result column="CREATER" property="creater" jdbcType="DECIMAL" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="UPDATER" property="updater" jdbcType="DECIMAL" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="VARCHAR" />
+    <result column="TAG_ID" property="tagId" jdbcType="DECIMAL" />
+    <result column="STATE" property="state" jdbcType="DECIMAL" />
   </resultMap>
-  <sql id="Base_Column_List">
-    article_id, name, image, content, author, create_time, update_time
+  <sql id="Base_Column_List" >
+    OID, ARTICLE_NAME, AUTHOR, PAGE_VIEW, SORT_NUMBER, ARTICLE_TYPE_ID, CREATER, CREATE_TIME, 
+    UPDATER, UPDATE_TIME, TAG_ID, STATE
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from article
-    where article_id = #{articleId,jdbcType=BIGINT}
+    from ARTICLE
+    where OID = #{oid,jdbcType=DECIMAL}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from article
-    where article_id = #{articleId,jdbcType=BIGINT}
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ARTICLE
+    where OID = #{oid,jdbcType=DECIMAL}
   </delete>
-  <insert id="insert" parameterType="com.blog.article.model.Article">
-    insert into article (article_id, name, image, 
-      content, author, create_time, 
-      update_time)
-    values (#{articleId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.blog.article.domain.Article" >
+    insert into ARTICLE (OID, ARTICLE_NAME, AUTHOR, 
+      PAGE_VIEW, SORT_NUMBER, ARTICLE_TYPE_ID, 
+      CREATER, CREATE_TIME, UPDATER, 
+      UPDATE_TIME, TAG_ID, STATE
+      )
+    values (#{oid,jdbcType=DECIMAL}, #{articleName,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{pageView,jdbcType=DECIMAL}, #{sortNumber,jdbcType=DECIMAL}, #{articleTypeId,jdbcType=DECIMAL}, 
+      #{creater,jdbcType=DECIMAL}, #{createTime,jdbcType=VARCHAR}, #{updater,jdbcType=DECIMAL}, 
+      #{updateTime,jdbcType=VARCHAR}, #{tagId,jdbcType=DECIMAL}, #{state,jdbcType=DECIMAL}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.blog.article.model.Article">
-    insert into article
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
-        article_id,
+  <insert id="insertSelective" parameterType="com.blog.article.domain.Article" >
+    insert into ARTICLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        OID,
       </if>
-      <if test="name != null">
-        name,
+      <if test="articleName != null" >
+        ARTICLE_NAME,
       </if>
-      <if test="image != null">
-        image,
+      <if test="author != null" >
+        AUTHOR,
       </if>
-      <if test="content != null">
-        content,
+      <if test="pageView != null" >
+        PAGE_VIEW,
       </if>
-      <if test="author != null">
-        author,
+      <if test="sortNumber != null" >
+        SORT_NUMBER,
       </if>
-      <if test="createTime != null">
-        create_time,
+      <if test="articleTypeId != null" >
+        ARTICLE_TYPE_ID,
       </if>
-      <if test="updateTime != null">
-        update_time,
+      <if test="creater != null" >
+        CREATER,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updater != null" >
+        UPDATER,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="tagId != null" >
+        TAG_ID,
+      </if>
+      <if test="state != null" >
+        STATE,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="articleId != null">
-        #{articleId,jdbcType=BIGINT},
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oid != null" >
+        #{oid,jdbcType=DECIMAL},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="articleName != null" >
+        #{articleName,jdbcType=VARCHAR},
       </if>
-      <if test="image != null">
-        #{image,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="author != null">
+      <if test="author != null" >
         #{author,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
+      <if test="pageView != null" >
+        #{pageView,jdbcType=DECIMAL},
+      </if>
+      <if test="sortNumber != null" >
+        #{sortNumber,jdbcType=DECIMAL},
+      </if>
+      <if test="articleTypeId != null" >
+        #{articleTypeId,jdbcType=DECIMAL},
+      </if>
+      <if test="creater != null" >
+        #{creater,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
         #{createTime,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null">
+      <if test="updater != null" >
+        #{updater,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
         #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="tagId != null" >
+        #{tagId,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.blog.article.model.Article">
-    update article
-    <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKeySelective" parameterType="com.blog.article.domain.Article" >
+    update ARTICLE
+    <set >
+      <if test="articleName != null" >
+        ARTICLE_NAME = #{articleName,jdbcType=VARCHAR},
       </if>
-      <if test="image != null">
-        image = #{image,jdbcType=VARCHAR},
+      <if test="author != null" >
+        AUTHOR = #{author,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
+      <if test="pageView != null" >
+        PAGE_VIEW = #{pageView,jdbcType=DECIMAL},
       </if>
-      <if test="author != null">
-        author = #{author,jdbcType=VARCHAR},
+      <if test="sortNumber != null" >
+        SORT_NUMBER = #{sortNumber,jdbcType=DECIMAL},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=VARCHAR},
+      <if test="articleTypeId != null" >
+        ARTICLE_TYPE_ID = #{articleTypeId,jdbcType=DECIMAL},
       </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=VARCHAR},
+      <if test="creater != null" >
+        CREATER = #{creater,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updater != null" >
+        UPDATER = #{updater,jdbcType=DECIMAL},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="tagId != null" >
+        TAG_ID = #{tagId,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=DECIMAL},
       </if>
     </set>
-    where article_id = #{articleId,jdbcType=BIGINT}
+    where OID = #{oid,jdbcType=DECIMAL}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.blog.article.model.Article">
-    update article
-    set name = #{name,jdbcType=VARCHAR},
-      image = #{image,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
-      author = #{author,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=VARCHAR}
-    where article_id = #{articleId,jdbcType=BIGINT}
+  <update id="updateByPrimaryKey" parameterType="com.blog.article.domain.Article" >
+    update ARTICLE
+    set ARTICLE_NAME = #{articleName,jdbcType=VARCHAR},
+      AUTHOR = #{author,jdbcType=VARCHAR},
+      PAGE_VIEW = #{pageView,jdbcType=DECIMAL},
+      SORT_NUMBER = #{sortNumber,jdbcType=DECIMAL},
+      ARTICLE_TYPE_ID = #{articleTypeId,jdbcType=DECIMAL},
+      CREATER = #{creater,jdbcType=DECIMAL},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      UPDATER = #{updater,jdbcType=DECIMAL},
+      UPDATE_TIME = #{updateTime,jdbcType=VARCHAR},
+      TAG_ID = #{tagId,jdbcType=DECIMAL},
+      STATE = #{state,jdbcType=DECIMAL}
+    where OID = #{oid,jdbcType=DECIMAL}
   </update>
-
-
-  <select id="getArticleList" parameterMap="java.util.Map" resultType="com.blog.article.model.Article">
-    select name , image ,author , create_time createTime  from article
-
-    limit ${page.start},${page.end}
-
-  </select>
-
 </mapper>
