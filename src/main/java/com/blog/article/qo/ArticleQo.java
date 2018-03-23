@@ -1,73 +1,30 @@
 package com.blog.article.qo;
 
 public class ArticleQo {
-    private Long articleId;
+    private Long oid;
 
-    private String name;
-
-    private String image;
-
-    private String content;
+    private String articleName;
 
     private String author;
 
+    private Long pageView;
+
+    private Long sortNumber;
+
+    private Long articleTypeId;
+
+    private Long creater;
+
     private String createTime;
+
+    private Long updater;
 
     private String updateTime;
 
-    public Long getArticleId() {
-        return articleId;
-    }
+    private Long tagId;
 
-    public void setArticleId(Long articleId) {
-        this.articleId = articleId;
-    }
+    private Short state;
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image == null ? null : image.trim();
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author == null ? null : author.trim();
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime == null ? null : createTime.trim();
-    }
-
-    public String getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime == null ? null : updateTime.trim();
-    }
 }

@@ -41,5 +41,10 @@ public class ArticleController {
         return  null;
     }
 
-
+    @RequestMapping(value="/getDetail")
+    @ResponseBody
+    public AjaxResult getDetail(Long oid){
+        articleService.getDetails(oid);
+        return  null;
+    }
 }
